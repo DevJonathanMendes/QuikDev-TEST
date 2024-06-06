@@ -30,7 +30,7 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   @Post('signin')
   async signIn(@Body() data: UpdateUserDto) {
-    const user = await this.usersService.findUniqueByEmail(data.email, {
+    const user = await this.usersService.findUniqueByEmail(data?.email, {
       password: true,
     });
 
@@ -64,12 +64,15 @@ export class UsersController {
   @Public() // Porém, se o usuário tiver token, consegue ver a senha também.
   @Get('profile/:email')
   async findUniqueByEmail(@Param('email') email: string, @Req() req) {
-    let select = {};
-    if (req?.user) select = { password: true };
-
-    const user = await this.usersService.findUniqueByEmail(email, select);
+    const user = await this.usersService.findUniqueByEmail(email, {
+      password: true,
+    });
     if (!user) {
       throw new BadRequestException(['User does not exist']);
+    }
+
+    if (req.user.id !== user.id) {
+      delete user.password;
     }
 
     return user;

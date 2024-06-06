@@ -42,3 +42,7 @@ Com as postagens é preciso fazer um CRUD simples com algumas exigências:
 - [ ] As edições sejam salvas como um histórico;
 - [ ] A postagem tenha um contador de visualizações;
 - [ ] A postagem tenha um contador de curtidas e não curtidas;
+
+## Infos
+
+- Para mais segurança, é bom adotar mais formas de verificar a autenticidade da requisição.
