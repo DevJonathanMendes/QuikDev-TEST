@@ -1,0 +1,17 @@
+# FOR DEVELOPMENT ONLY.
+
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres-QuikDev
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - pg-volume:/var/lib/postgresql/data
+    ports:
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+
+volumes:
+  pg-volume:
