@@ -95,17 +95,13 @@ export class UsersController {
       { email: data.email },
     );
 
-    const message: string[] = [];
     users.forEach((user) => {
-      // Há possibilidade de gerar mensagem duplicada.
-      if (user.id !== data.id) message.push('User does not exist');
-      if (user.email === data.email) message.push('E-mail already exists');
+      if (user.email === data.email) {
+        throw new BadRequestException('E-mail already exists');
+      }
     });
 
-    if (message.length > 0) {
-      throw new BadRequestException(message);
-    }
-
+    delete data.id;
     return this.usersService.update(req.user.id, data);
   }
 
