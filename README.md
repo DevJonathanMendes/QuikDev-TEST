@@ -38,14 +38,25 @@ Com o usuário você pode fazer dois processos de CRUD:
 Com as postagens é preciso fazer um CRUD simples com algumas exigências:
 
 - [x] Apenas o próprio usuário pode editar ou excluir as postagens;
-- [ ] A postagem tenha a possibilidade de adicionar uma imagem em uma api dedicada a isso;
+- [ ] A postagem tenha a possibilidade de adicionar uma imagem em uma API dedicada;
 - [ ] As edições sejam salvas como um histórico;
+  - Não daria tempo, mas eu iria criar uma tabela dedicada a isso como um array nos Posts, onde cada edição adiciona um novo Editions (ou Edit_History).
 - [x] A postagem tenha um contador de visualizações;
 - [ ] A postagem tenha um contador de curtidas e não curtidas;
+  - Não daria tempo, mas eu usaria uma lógica parecida com a do Views.
 
-## Infos
+Com os comentários é preciso fazer um CRUD simples com algumas exigências:
+
+- [ ] Apenas o próprio usuário pode editar os comentários;
+- [ ] Usuário do comentário pode remover o comentário;
+- [ ] Usuário da postagem também pode remover o comentário;
+- [ ] adicionar marcador que foi removida pelo usuário ou dono da postagem;
+- [ ] Mandar um e-mail para o usuário da postagem que ele possui um novo comentário em seu post;
+
+## Infos / Anotações
 
 - Para mais segurança, é bom adotar mais formas de verificar a autenticidade da requisição.
-- A implementação de contagem de visualizações poderia estar melhor implementada.
-- A verificação de autenticidade também poderia estar melhor implementada, está se repetindo muito, talvez agrupar no recurso "auth".
-- As rotas estão confusas, não foram planejadas, mas não é custoso a refatoração.
+- ~~A implementação de contagem de visualizações poderia estar melhor implementada.~~
+- A verificação de autenticidade pode ser melhorada, parece repetitiva, talvez agrupar no módulo "auth".
+- As rotas ~~estão confusas,~~ não foram planejadas, mas não é custoso a refatoração.
+- Possibilidade/Sugestão de refatorar o código utilizando decorators personalizados, diminuiria a verbosidade, melhoraria na escalabilidade, no controle da aplicação e na segurança do código.
