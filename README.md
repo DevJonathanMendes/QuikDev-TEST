@@ -13,10 +13,11 @@ Teste prático para desenvolvedores Backend.
 - **PostgreSQL vLatest**: "Já que tá aqui, né", outro BD SQL também serviria.
 - **class-transformer/validator v0.5/v0.14**: Para validar dados.
 - **@nestjs/Swagger v7**: Para a documentação.
-- **HTTPie v2024**: Semelhante ao Postman e Insomnia, só que mais simples. *Não suporta exportação*.
 - **compression v1.7**: Para compactar/descompactar requisições.
 - **helmet v7**: Adiciona proteção extra nas requisições.
 - **Jest v29.5**: Para testes. Muito usado.
+- **HTTPie v2024**: Semelhante ao Postman e Insomnia, só que mais simples. *Não suporta exportação*.
+- **Postman v11**: Semelhante ao HTTPie, só que mais complexo.
 
 ## Como Subir a Aplicação
 
@@ -26,7 +27,7 @@ Teste prático para desenvolvedores Backend.
 - [x] Estrutura base do sistema (Banco de Dados).
 - [x] Sistema de autenticação por token para chamas de REST API.
 
-Com o usuário você pode fazer dois processos de CRUD:
+Com o **Usuário** você pode fazer dois processos de CRUD:
 
 - [x] CRUD simples;
   - [x] Colocar checagem de permissão se possuir autenticação;
@@ -35,23 +36,36 @@ Com o usuário você pode fazer dois processos de CRUD:
   - [x] Registro na fase de autenticação com edição de perfil do usuário logado
   - Também não entendi 100%, mas os usuários só podem acessar informações completas de determinadas contas se estiverem autenticados na rota em questão.
 
-Com as postagens é preciso fazer um CRUD simples com algumas exigências:
+Com as **Postagens** é preciso fazer um CRUD simples com algumas exigências:
 
 - [x] Apenas o próprio usuário pode editar ou excluir as postagens;
 - [ ] A postagem tenha a possibilidade de adicionar uma imagem em uma API dedicada;
 - [ ] As edições sejam salvas como um histórico;
-  - Não daria tempo, mas eu iria criar uma tabela dedicada a isso como um array nos Posts, onde cada edição adiciona um novo Editions (ou Edit_History).
+  - Não daria tempo, criaria uma tabela dedicada como um array nos Posts, onde cada edição adiciona um novo Editions (ou Edit_History).
 - [x] A postagem tenha um contador de visualizações;
 - [ ] A postagem tenha um contador de curtidas e não curtidas;
-  - Não daria tempo, mas eu usaria uma lógica parecida com a do Views.
+  - Não daria tempo, usaria uma lógica parecida com a do Views.
 
-Com os comentários é preciso fazer um CRUD simples com algumas exigências:
+Com os **Comentários** é preciso fazer um CRUD simples com algumas exigências:
 
-- [ ] Apenas o próprio usuário pode editar os comentários;
-- [ ] Usuário do comentário pode remover o comentário;
-- [ ] Usuário da postagem também pode remover o comentário;
-- [ ] adicionar marcador que foi removida pelo usuário ou dono da postagem;
+- [x] Apenas o próprio usuário pode editar os comentários;
+- [x] Usuário do comentário pode remover o comentário;
+- [x] Usuário da postagem também pode remover o comentário;
+- [ ] Adicionar marcador que foi removida pelo usuário ou dono da postagem;
+  - Não daria tempo, criaria uma tabela para os posts onde, ao apagar o comentário, teria as informações do comentário, e não poderia editar/remover a mensagem que diz que apagou.
 - [ ] Mandar um e-mail para o usuário da postagem que ele possui um novo comentário em seu post;
+
+Crie uma rota que gere um relatório que traga os posts com os seguintes campos:
+
+- [ ] Título;
+- [ ] Quantos comentários eles possuem;
+- [ ] Quantas visualizações;
+- [ ] Quantas curtidas;
+- [ ] Quantas não curtidas.
+
+Documentar as chamadas da API com uma ferramenta de requisição e enviar o arquivo de configuração:
+
+- [ ] Postman
 
 ## Infos / Anotações
 
@@ -62,4 +76,5 @@ Com os comentários é preciso fazer um CRUD simples com algumas exigências:
 - Possibilidade/Sugestão de refatorar o código utilizando decorators personalizados, diminuiria a verbosidade, melhoraria na escalabilidade, no controle da aplicação e na segurança do código.
 - Decidi abordar uma maneia diferente nde estruturar as pastas do projeto utilizando NestJS, onde módulos podem estar dentro de módulos; "pai-filho".
 - Houve/Corrigido um "bug" que AuthModule não conseguia ler uma variável de ambiente (JWT_TOKEN), só ocorreu com a abordagem nova. Sem tempo para averiguar melhor.
-- 
+- Não deu tempo de implementar um filtro nos comentários.
+- Talvez uma melhoria seja necessária na tabela de comentários, incluir o id do usuário do post, não apenas o id do usuário que comenta. Dessa forma, facilitaria que o dono do post também apagasse o Comment.
