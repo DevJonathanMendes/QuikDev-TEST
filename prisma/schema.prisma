@@ -32,7 +32,7 @@ model View {
   user_id Int
   post_id Int
   user    User @relation(fields: [user_id], references: [id])
-  Post    Post @relation(fields: [post_id], references: [id])
+  Post    Post @relation(fields: [post_id], references: [id], onDelete: Cascade)
 }
 
 model Comment {
