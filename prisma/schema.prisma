@@ -14,7 +14,7 @@ model User {
   password String    @db.VarChar(255)
   post     Post[]
   comment  Comment[]
-  View     View[]
+  view     View[]
 }
 
 model Post {
@@ -32,7 +32,7 @@ model View {
   user_id Int
   post_id Int
   user    User @relation(fields: [user_id], references: [id])
-  Post    Post @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post    Post @relation(fields: [post_id], references: [id], onDelete: Cascade)
 }
 
 model Comment {
@@ -41,5 +41,5 @@ model Comment {
   user_id     Int
   post_id     Int
   user        User   @relation(fields: [user_id], references: [id])
-  post        Post   @relation(fields: [post_id], references: [id])
+  post        Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
 }

@@ -23,6 +23,14 @@ export class PostsService {
     return this.prisma.post.findMany();
   }
 
+  // Usado por pelo serviço do Comment, para pode apagar um comentário específico,
+  // e também poder fazer o dono do Post ter a possibilidade de apagar o Comment.
+  findUniquePostById(id: number): Promise<PostEntity> {
+    return this.prisma.post.findUnique({
+      where: { id },
+    });
+  }
+
   async findUniquePost(
     req_user_id: number,
     user_id: number,
