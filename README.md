@@ -37,12 +37,15 @@ Com o usuário você pode fazer dois processos de CRUD:
 
 Com as postagens é preciso fazer um CRUD simples com algumas exigências:
 
-- [ ] Apenas o próprio usuário pode editar ou excluir as postagens;
+- [x] Apenas o próprio usuário pode editar ou excluir as postagens;
 - [ ] A postagem tenha a possibilidade de adicionar uma imagem em uma api dedicada a isso;
 - [ ] As edições sejam salvas como um histórico;
-- [ ] A postagem tenha um contador de visualizações;
+- [x] A postagem tenha um contador de visualizações;
 - [ ] A postagem tenha um contador de curtidas e não curtidas;
 
 ## Infos
 
 - Para mais segurança, é bom adotar mais formas de verificar a autenticidade da requisição.
+- A implementação de contagem de visualizações poderia estar melhor implementada.
+- A verificação de autenticidade também poderia estar melhor implementada, está se repetindo muito, talvez agrupar no recurso "auth".
+- As rotas estão confusas, não foram planejadas, mas não é custoso a refatoração.

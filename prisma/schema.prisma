@@ -14,22 +14,32 @@ model User {
   password String    @db.VarChar(255)
   post     Post[]
   comment  Comment[]
+  View     View[]
 }
 
 model Post {
   id          Int       @id @default(autoincrement())
   title       String    @db.VarChar(100)
   description String    @db.Text
-  user_id     Int       @unique
+  user_id     Int
   user        User      @relation(fields: [user_id], references: [id])
+  views       View[]
   comment     Comment[]
+}
+
+model View {
+  id      Int  @id @default(autoincrement())
+  user_id Int
+  post_id Int
+  user    User @relation(fields: [user_id], references: [id])
+  Post    Post @relation(fields: [post_id], references: [id])
 }
 
 model Comment {
   id          Int    @id @default(autoincrement())
   description String @db.Text
-  user_id     Int    @unique
-  post_id     Int    @unique
+  user_id     Int
+  post_id     Int
   user        User   @relation(fields: [user_id], references: [id])
   post        Post   @relation(fields: [post_id], references: [id])
 }
