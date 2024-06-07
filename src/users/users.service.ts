@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
-import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   create(data: CreateUserDto): Promise<UserEntity> {
     return this.prisma.user.create({ data });
@@ -27,10 +26,13 @@ export class UsersService {
     });
   }
 
-  findUniqueById(id: number): Promise<Partial<UserEntity>> {
+  findUniqueById(
+    id: number,
+    select?: Prisma.UserSelect,
+  ): Promise<Partial<UserEntity>> {
     return this.prisma.user.findUnique({
       where: { id },
-      select: { id: true },
+      select: { id: true, ...select },
     });
   }
 
@@ -40,7 +42,7 @@ export class UsersService {
   ): Promise<Partial<UserEntity>> {
     return this.prisma.user.findUnique({
       where: { email },
-      select: { id: true, name: true, email: true, ...select },
+      select: { id: true, name: true, email: true, post: true, ...select },
     });
   }
 

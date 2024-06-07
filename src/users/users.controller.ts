@@ -13,6 +13,7 @@ import {
   Req,
   UnauthorizedException,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from '../auth/auth.service';
 import { Public } from '../auth/decorators/public.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -22,8 +23,8 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(
-    private usersService: UsersService,
-    private authService: AuthService,
+    private readonly usersService: UsersService,
+    private readonly authService: AuthService,
   ) {}
 
   @Public()
@@ -62,11 +63,15 @@ export class UsersController {
   }
 
   @Public() // Porém, se o usuário tiver token, consegue ver a senha também.
-  @Get('profile/:email')
-  async findUniqueByEmail(@Param('email') email: string, @Req() req) {
+  @Get(':email')
+  async findUniqueUser(
+    @Req() req: Request & { user: { id: number } },
+    @Param('email') email: string,
+  ) {
     const user = await this.usersService.findUniqueByEmail(email, {
       password: true,
     });
+
     if (!user) {
       throw new BadRequestException(['User does not exist']);
     }
@@ -78,9 +83,9 @@ export class UsersController {
     return user;
   }
 
-  @Patch('profile/:id/configuration')
+  @Patch(':id/edit')
   async patchUser(
-    @Req() req,
+    @Req() req: Request & { user: { id: number } },
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UpdateUserDto,
   ) {
@@ -105,8 +110,11 @@ export class UsersController {
     return this.usersService.update(req.user.id, data);
   }
 
-  @Delete('profile/:id')
-  async deleteUser(@Req() req, @Param('id', ParseIntPipe) id: number) {
+  @Delete(':id/delete')
+  async deleteUser(
+    @Req() req: Request & { user: { id: number } },
+    @Param('id', ParseIntPipe) id: number,
+  ) {
     if (id !== req?.user.id) {
       throw new UnauthorizedException([
         'You do not have permission to delete this user',
