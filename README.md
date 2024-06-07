@@ -60,3 +60,6 @@ Com os comentários é preciso fazer um CRUD simples com algumas exigências:
 - A verificação de autenticidade pode ser melhorada, parece repetitiva, talvez agrupar no módulo "auth".
 - As rotas ~~estão confusas,~~ não foram planejadas, mas não é custoso a refatoração.
 - Possibilidade/Sugestão de refatorar o código utilizando decorators personalizados, diminuiria a verbosidade, melhoraria na escalabilidade, no controle da aplicação e na segurança do código.
+- Decidi abordar uma maneia diferente nde estruturar as pastas do projeto utilizando NestJS, onde módulos podem estar dentro de módulos; "pai-filho".
+- Houve/Corrigido um "bug" que AuthModule não conseguia ler uma variável de ambiente (JWT_TOKEN), só ocorreu com a abordagem nova. Sem tempo para averiguar melhor.
+- 
