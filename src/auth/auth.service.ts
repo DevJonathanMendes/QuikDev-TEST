@@ -16,7 +16,7 @@ interface SignToken {
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   signToken: SignToken = (user, data = null) => {
     if (data)
