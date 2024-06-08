@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { MailService } from '../../../mail/mail.service';
 import { PrismaService } from '../../../prisma/prisma.service';
+import { PostEntity } from '../entities/post.entity';
 import { PostsService } from '../posts.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
@@ -9,20 +12,32 @@ export class CommentsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly postService: PostsService,
+    private readonly mail: MailService,
   ) {}
 
-  createComment(
+  async createComment(
     user_id: number,
     post_id: number,
     { description }: Partial<CreateCommentDto>,
   ) {
-    return this.prisma.comment.create({
+    const comment = await this.prisma.comment.create({
       data: {
         post_id,
         user_id,
         description,
       },
     });
+
+    const post = await this.findUniquePostById(post_id, { user: true });
+
+    const { name, email } = post.user;
+    this.mail.sendEmailToUser({
+      name,
+      email,
+      comment: comment.description,
+    });
+
+    return comment;
   }
 
   findAllComments(user_id: number, post_id: number) {
@@ -43,8 +58,11 @@ export class CommentsService {
     });
   } */
 
-  findUniquePostById(post_id: number) {
-    return this.postService.findUniquePostById(post_id);
+  findUniquePostById(
+    post_id: number,
+    include?: Prisma.PostInclude,
+  ): Promise<Partial<PostEntity & { user: { name: string; email: string } }>> {
+    return this.postService.findUniquePostById(post_id, include);
   }
 
   findUniquePost(req_user_id: number, user_id: number, post_id: number) {

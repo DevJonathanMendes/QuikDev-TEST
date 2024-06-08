@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 
 import { UserEntity } from '../entities/user.entity';
@@ -25,9 +26,13 @@ export class PostsService {
 
   // Usado por pelo serviço do Comment, para pode apagar um comentário específico,
   // e também poder fazer o dono do Post ter a possibilidade de apagar o Comment.
-  findUniquePostById(id: number): Promise<PostEntity> {
+  findUniquePostById(
+    id: number,
+    include?: Prisma.PostInclude,
+  ): Promise<PostEntity> {
     return this.prisma.post.findUnique({
       where: { id },
+      include: { ...include },
     });
   }
 
