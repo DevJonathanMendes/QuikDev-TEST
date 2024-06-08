@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "47b5b5e5-0d53-44ef-a679-fb8e82e58744",
+		"name": "QuikDev-TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36173036"
+	},
+	"item": [
+		{
+			"name": "USERS",
+			"item": [
+				{
+					"name": "SIGNIN",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"u1@email.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{3700}}/users/signin/"
+					},
+					"response": []
+				},
+				{
+					"name": "SIGNUP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"u7\",\n    \"email\": \"u7@email.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{3700}}/users/signup/"
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{3700}}/users/"
+					},
+					"response": []
+				},
+				{
+					"name": "FIND BY EMAIL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{3700}}/users/u7@email.com"
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT BY ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"editedu1@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{3700}}/users/1/edit"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{3700}}/users/7/delete"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POSTS",
+			"item": [
+				{
+					"name": "REPORT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{3700}}/users/1/posts/report"
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE BY ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"  title  u1  \",\n    \"description\": \"  description  u1  \"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{3700}}/users/1/posts/"
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{3700}}/users/1/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{3700}}/users/1/posts/4"
+					},
+					"response": []
+				},
+				{
+					"name": "EDITAR",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"edited title u1\",\n    \"description\": \"edited description u1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{3700}}/users/1/posts/15"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETAR",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{3700}}/users/1/posts/16"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "COMMENTS",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \" u1  comment haha  \"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{3700}}/users/2/posts/8/comments"
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{3700}}/users/1/posts/8/comments"
+					},
+					"response": []
+				},
+				{
+					"name": "FIND ONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{3700}}/users/1/posts/8/comments/7"
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT BY ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"edited by u1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{3700}}/users/1/posts/8/comments/7"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{3700}}/users/1/posts/8/comments/11"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1MUBlbWFpbC5jb20iLCJpYXQiOjE3MTc4MDQyMzgsImV4cCI6MTcxNzg0MDIzOH0.my1zv-2Yr2YeCIE0LHUzhat8zpkfQG1pKRO2QTHkta4"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
