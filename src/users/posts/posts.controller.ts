@@ -23,6 +23,35 @@ import { PostsService } from './posts.service';
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
+  @Get('report')
+  async report(
+    @Req() req: Request & { user: { id: number } },
+    @Param('user_id', ParseIntPipe) user_id: number,
+  ) {
+    // Evitaria uma chamada ao DB.
+    if (user_id !== req.user.id) {
+      throw new UnauthorizedException([
+        "You are not allowed to view other users' post report.",
+      ]);
+    }
+
+    const posts = await this.postsService.postReport(user_id);
+
+    // Mas ficaria repetitivo.
+    // Para garantir.
+    if (posts[0].user_id !== req.user.id) {
+      throw new UnauthorizedException([
+        "You are not allowed to view other users' post report.",
+      ]);
+    }
+
+    return posts.map((post) => ({
+      title: post.title,
+      commentCount: post._count.comment,
+      views: post.views,
+    }));
+  }
+
   @Post()
   async create(
     @Req() req: Request & { user: { id: number } },

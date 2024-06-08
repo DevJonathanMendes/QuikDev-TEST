@@ -62,7 +62,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Public() // Porém, se o usuário tiver token, consegue ver a senha também.
+  @Public() // Se o usuário tiver token, consegue ver a senha também.
   @Get(':email')
   async findUniqueUser(
     @Req() req: Request & { user: { id: number } },

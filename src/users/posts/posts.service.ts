@@ -16,6 +16,20 @@ export class PostsService {
     private readonly usersService: UsersService,
   ) {}
 
+  async postReport(user_id: number) {
+    return this.prisma.post.findMany({
+      where: { user_id: user_id },
+      select: {
+        user_id: true,
+        title: true,
+        _count: {
+          select: { comment: true },
+        },
+        views: true,
+      },
+    });
+  }
+
   createPost(data: CreatePostDto): Promise<PostEntity> {
     return this.prisma.post.create({ data });
   }
