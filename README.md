@@ -2,24 +2,6 @@
 
 Teste prático para desenvolvedores Backend.
 
-## Stack
-
-- **NodeJS v20**: Ambiente de desenvolvimento exigido para o teste.
-- **PNPM v9**: Gerenciador de pacotes eficiente em armazenamento e rápido por cache.
-- **TypeScript v5**: "JavaScript tipado", muito importante para aplicações de servidor, por confiabilidade e escalabilidade.
-- **NestJS v10**: Um framework robusto e estruturado para o desenvolvimento de aplicação para servidor.
-- **PrismaORM v5**: Mapeador relacional, facilitará as operações no banco de dados.
-- **Docker v24.0.5**: Facilita que aplicação funcione em diferentes máquinas, melhorando a confiabilidade e manutenção. Para o BD e E-mail.
-- **PostgreSQL v16.0**: "Já que tá aqui, né", outro BD SQL também serviria.
-- **MailHog v1.0.1**: Um utilitário de desenvolvimento de serviço de e-mail.
-- **class-transformer/validator v0.5/v0.14**: Para validar dados.
-- **@nestjs/Swagger v7**: Para a documentação.
-- **compression v1.7**: Para compactar/descompactar requisições.
-- **helmet v7**: Adiciona proteção extra nas requisições.
-- ~~**Jest v29.5**: Para testes. Muito usado.~~ *Não houve tempo, o desenvolvimento não foi orientado a testes.*
-- **HTTPie v2024**: Semelhante ao Postman e Insomnia, só que mais simples. *Não suporta exportação*.
-- **Postman v11**: Semelhante ao HTTPie, só que mais complexo.
-
 ## Como Inciar a Aplicação
 
 É extremamente importado ter instalado na sua máquina:
@@ -67,7 +49,7 @@ Para acessar o banco de dados diretamente sem precisar do PgAdmin.
 
 ## Tarefas
 
-### Tarefa de Elaboração de Documento
+### Elaboração de Documento
 
 - [x] Documento README.md.
 - [x] Estrutura base do sistema (Banco de Dados).
@@ -107,7 +89,7 @@ Com os **Comentários** é preciso fazer um CRUD simples com algumas exigências
   - *Não daria tempo, criaria uma tabela para os posts onde, ao apagar o comentário, teria as informações do comentário, e não poderia editar/remover a mensagem que diz que apagou.*
 - [x] Mandar um e-mail para o usuário da postagem que ele possui um novo comentário em seu post;
 
-### Tarefa de Relatório dos Posts
+### Relatório dos Posts
 
 Crie uma rota que gere um relatório que traga os posts com os seguintes campos:
 
@@ -119,7 +101,7 @@ Crie uma rota que gere um relatório que traga os posts com os seguintes campos:
 
 *Talvez não seja um relatório super detalhado, mas já é um início.*
 
-### Tarefa de Documentação
+### Documentação
 
 Documentar as chamadas da API com uma ferramenta de requisição e enviar o arquivo de configuração:
 
@@ -129,6 +111,27 @@ Documentar as chamadas da API com uma ferramenta de requisição e enviar o arqu
   - *Acho que está Incompleto. Só tem as rotas testadas manualmente*
 - [x] Swagger
   - *Incompleto.*
+
+## Stack
+
+- **NodeJS v20**: Ambiente de desenvolvimento exigido para o teste.
+- **PNPM v9**: Gerenciador de pacotes eficiente em armazenamento e rápido por cache.
+- **TypeScript v5**: "JavaScript tipado", muito importante para aplicações de servidor, por confiabilidade e escalabilidade.
+- **NestJS v10**: Um framework robusto e estruturado para o desenvolvimento de aplicação para servidor.
+- **PrismaORM v5**: Mapeador relacional, facilitará as operações no banco de dados.
+- **Docker v24.0.5**: Facilita que aplicação funcione em diferentes máquinas, melhorando a confiabilidade e manutenção. Para o BD e E-mail.
+- **PostgreSQL v16.0**: "Já que tá aqui, né", outro BD SQL também serviria.
+- **MailHog v1.0.1**: Um utilitário de desenvolvimento de serviço de e-mail.
+- **class-transformer/validator v0.5/v0.14**: Para validar dados.
+- **Pug v3**: Engine de template para HTML, apenas para o envio de e-mail.
+- **NodeMail v6.9**: Um módulo de envio de e-mail para o NodeJS.
+- **@nestjs-modules/mailer v2**: Módulo para o NestJS, tal como NodeMailer.
+- **@nestjs/Swagger v7**: Para a documentação.
+- **compression v1.7**: Para compactar/descompactar requisições.
+- **helmet v7**: Adiciona proteção extra nas requisições.
+- ~~**Jest v29.5**: Para testes. Muito usado.~~ *Não houve tempo, o desenvolvimento não foi orientado a testes.*
+- **HTTPie v2024**: Semelhante ao Postman e Insomnia, só que mais simples. *Não suporta exportação*.
+- **Postman v11**: Semelhante ao HTTPie, só que mais complexo.
 
 ## Infos / Anotações
 
