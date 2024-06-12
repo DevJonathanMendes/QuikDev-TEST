@@ -8,6 +8,7 @@
     "pnpm": ">=v9.0.0"
   },
   "scripts": {
+    "studio": "npx prisma studio",
     "db:generate": "npx prisma generate",
     "db:reset": "npx prisma migrate reset --force",
     "db:dev": "npx prisma migrate dev --name init",
