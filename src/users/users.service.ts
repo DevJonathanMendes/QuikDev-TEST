@@ -15,7 +15,7 @@ export class UsersService {
 
   findAll(): Promise<Partial<UserEntity>[]> {
     return this.prisma.user.findMany({
-      select: { id: true, name: true, email: true },
+      select: { name: true, email: true },
     });
   }
 

@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate {
         'Unable to identify a valid bearer token',
       ]);
     }
-    
+
     return true;
   }
 

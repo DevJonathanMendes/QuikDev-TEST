@@ -6,6 +6,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  NotFoundException,
   Param,
   ParseIntPipe,
   Patch,
@@ -16,6 +17,7 @@ import {
 import { Request } from 'express';
 import { AuthService } from '../auth/auth.service';
 import { Public } from '../auth/decorators/public.decorator';
+import { UserToken } from '../auth/entities/token.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
@@ -44,7 +46,7 @@ export class UsersController {
 
   @Public()
   @Post('signup')
-  async signUp(@Body() data: CreateUserDto) {
+  async signUp(@Body() data: CreateUserDto): Promise<UserToken> {
     const emailExists = await this.usersService.findUniqueByEmail(data.email);
 
     if (emailExists) {
@@ -52,7 +54,6 @@ export class UsersController {
     }
 
     const newUser = await this.usersService.create(data);
-
     return this.authService.signToken(newUser);
   }
 
@@ -62,9 +63,9 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Public() // Se o usuário tiver token, consegue ver a senha também.
+  @Public() // Se o usuário estiver autenticado, consegue ver a senha também.
   @Get(':email')
-  async findUniqueUser(
+  async findUnique(
     @Req() req: Request & { user: { id: number } },
     @Param('email') email: string,
   ) {
@@ -73,17 +74,18 @@ export class UsersController {
     });
 
     if (!user) {
-      throw new BadRequestException(['User does not exist']);
+      throw new NotFoundException(['User does not exist']);
     }
 
-    if (req.user.id !== user.id) {
+    if (req.user?.id !== user.id) {
       delete user.password;
     }
 
+    delete user.id;
     return user;
   }
 
-  @Patch(':id/edit')
+  @Patch(':id')
   async patchUser(
     @Req() req: Request & { user: { id: number } },
     @Param('id', ParseIntPipe) id: number,
@@ -110,7 +112,7 @@ export class UsersController {
     return this.usersService.update(req.user.id, data);
   }
 
-  @Delete(':id/delete')
+  @Delete(':id')
   async deleteUser(
     @Req() req: Request & { user: { id: number } },
     @Param('id', ParseIntPipe) id: number,
