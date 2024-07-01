@@ -8,6 +8,7 @@
     "pnpm": ">=v9.0.0"
   },
   "scripts": {
+    "docker:dev": "docker-compose up -d && pnpm start:dev",
     "studio": "npx prisma studio",
     "db:generate": "npx prisma generate",
     "db:reset": "npx prisma migrate reset --force",
